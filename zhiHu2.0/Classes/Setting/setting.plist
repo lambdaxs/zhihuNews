@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>setting</key>
+	<array>
+		<string>清除缓存</string>
+		<string>夜间模式</string>
+		<string>无图模式</string>
+	</array>
+	<key>about</key>
+	<array>
+		<string>捐献我们</string>
+		<string>关于</string>
+	</array>
+</dict>
+</plist>

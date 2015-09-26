@@ -1,0 +1,35 @@
+//
+//  XSProject.pch
+//
+//
+//  Created by apple on 14-3-5.
+//  Copyright (c) 2014年 apple. All rights reserved.
+//
+
+/** 
+ 
+ */
+
+#ifdef __OBJC__
+
+#import "UIView+Frame.h"
+#import "UIImage+Image.h"
+
+#define XSKeyWindow [UIApplication sharedApplication].keyWindow
+
+#define XSScreenWidth [UIScreen mainScreen].bounds.size.width
+#define XSScreenHeight [UIScreen mainScreen].bounds.size.height
+
+
+
+#ifdef DEBUG // 调试
+
+#define XSLog(...) NSLog(__VA_ARGS__)
+
+#else // 发布
+
+#define XSLog(...)
+
+#endif
+
+#endif
