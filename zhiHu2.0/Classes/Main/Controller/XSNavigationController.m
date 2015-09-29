@@ -24,7 +24,7 @@
 {
     // 设置导航条按钮的文字颜色
     UIBarButtonItem *item = [UIBarButtonItem appearanceWhenContainedIn:self, nil];
-    NSDictionary *titleAttr = @{NSForegroundColorAttributeName:[UIColor blackColor]};
+    NSDictionary *titleAttr = @{NSForegroundColorAttributeName:[UIColor blackColor],NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Bold" size:18.0]};
     [item setTitleTextAttributes:titleAttr forState:UIControlStateNormal];
     
     //设置导航条背景图片 文字样式
@@ -55,11 +55,11 @@
 }
 
 
-#pragma mark - overried push
+#pragma mark - overried push 设置超过二级界面的返回按钮
 -(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     if (self.childViewControllers.count) {
-        UIBarButtonItem *leftItem = [UIBarButtonItem buttonWithTarget:self action:@selector(popBack) forControlEvent:UIControlEventTouchUpInside title:@"返回"];
+        UIBarButtonItem *leftItem = [UIBarButtonItem buttonWithTarget:self action:@selector(popBack) forControlEvent:UIControlEventTouchUpInside image:[UIImage imageNamed:@"navi_back"]];
         viewController.navigationItem.leftBarButtonItem = leftItem;
     }
     //进入故事详情界面时 隐藏naviBar

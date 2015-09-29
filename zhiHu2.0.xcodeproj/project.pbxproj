@@ -86,6 +86,7 @@
 		3008E6F31BB6BCE400A865FC /* XSToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3008E6F21BB6BCE400A865FC /* XSToolView.m */; };
 		3008E6F71BB6BDFC00A865FC /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3008E6F61BB6BDFC00A865FC /* Reachability.m */; };
 		3008E6FA1BB6D27400A865FC /* XSContentResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 3008E6F91BB6D27400A865FC /* XSContentResult.m */; };
+		30FAF7971BB9675100154B3A /* NSString+XSDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FAF7961BB9675100154B3A /* NSString+XSDate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,7 +125,7 @@
 		3008E5D61BB2A0CA00A865FC /* XSFavouriteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSFavouriteController.m; sourceTree = "<group>"; };
 		3008E5DB1BB2A6BB00A865FC /* UIBarButtonItem+XSNaviItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIBarButtonItem+XSNaviItem.h"; path = "../Home/Controller/UIBarButtonItem+XSNaviItem.h"; sourceTree = "<group>"; };
 		3008E5DC1BB2A6BB00A865FC /* UIBarButtonItem+XSNaviItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBarButtonItem+XSNaviItem.m"; path = "../Home/Controller/UIBarButtonItem+XSNaviItem.m"; sourceTree = "<group>"; };
-		3008E5DE1BB2C34D00A865FC /* setting.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = setting.plist; sourceTree = "<group>"; };
+		3008E5DE1BB2C34D00A865FC /* setting.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = setting.plist; path = ../setting.plist; sourceTree = "<group>"; };
 		3008E5E01BB2C53C00A865FC /* XSSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XSSetting.h; sourceTree = "<group>"; };
 		3008E5E11BB2C53C00A865FC /* XSSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSSetting.m; sourceTree = "<group>"; };
 		3008E5EB1BB2CFE500A865FC /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -259,6 +260,8 @@
 		3008E6F61BB6BDFC00A865FC /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		3008E6F81BB6D27400A865FC /* XSContentResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XSContentResult.h; sourceTree = "<group>"; };
 		3008E6F91BB6D27400A865FC /* XSContentResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSContentResult.m; sourceTree = "<group>"; };
+		30FAF7951BB9675100154B3A /* NSString+XSDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XSDate.h"; sourceTree = "<group>"; };
+		30FAF7961BB9675100154B3A /* NSString+XSDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XSDate.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -336,8 +339,8 @@
 		3008E5A51BB290A800A865FC /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3008E6EA1BB6BC8500A865FC /* Content */,
-				3008E6DD1BB6BC7700A865FC /* Tool */,
+				3008E6EA1BB6BC8500A865FC /* Content（内容） */,
+				3008E6DD1BB6BC7700A865FC /* Tool（业务逻辑） */,
 				3008E5AC1BB290A800A865FC /* Home（首页） */,
 				3008E5C01BB290A800A865FC /* Setting（设置） */,
 				3008E5A61BB290A800A865FC /* Favourite（收藏） */,
@@ -491,7 +494,6 @@
 				3008E5C11BB290A800A865FC /* Controller */,
 				3008E5C41BB290A800A865FC /* Model */,
 				3008E5C51BB290A800A865FC /* View */,
-				3008E5DE1BB2C34D00A865FC /* setting.plist */,
 			);
 			name = "Setting（设置）";
 			path = Setting;
@@ -513,6 +515,7 @@
 		3008E5C41BB290A800A865FC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3008E5DE1BB2C34D00A865FC /* setting.plist */,
 				3008E5E01BB2C53C00A865FC /* XSSetting.h */,
 				3008E5E11BB2C53C00A865FC /* XSSetting.m */,
 			);
@@ -535,6 +538,8 @@
 				3008E5BC1BB290A800A865FC /* UIImage+Image.m */,
 				3008E5BD1BB290A800A865FC /* UIView+Frame.h */,
 				3008E5BE1BB290A800A865FC /* UIView+Frame.m */,
+				30FAF7951BB9675100154B3A /* NSString+XSDate.h */,
+				30FAF7961BB9675100154B3A /* NSString+XSDate.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -693,28 +698,24 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
-		3008E6DD1BB6BC7700A865FC /* Tool */ = {
+		3008E6DD1BB6BC7700A865FC /* Tool（业务逻辑） */ = {
 			isa = PBXGroup;
 			children = (
-				3008E6DE1BB6BC7700A865FC /* XSCssFile.h */,
-				3008E6DF1BB6BC7700A865FC /* XSCssFile.m */,
-				3008E6E01BB6BC7700A865FC /* XSHttpTool.h */,
-				3008E6E11BB6BC7700A865FC /* XSHttpTool.m */,
-				3008E6E21BB6BC7700A865FC /* XSResultTool.h */,
-				3008E6E31BB6BC7700A865FC /* XSResultTool.m */,
-				3008E6E41BB6BC7700A865FC /* XSTestNet.h */,
-				3008E6E51BB6BC7700A865FC /* XSTestNet.m */,
+				3008E6FE1BB6F8E300A865FC /* HttpTool（网络请求） */,
+				3008E6FB1BB6F8A700A865FC /* CssFileTool */,
 			);
+			name = "Tool（业务逻辑）";
 			path = Tool;
 			sourceTree = "<group>";
 		};
-		3008E6EA1BB6BC8500A865FC /* Content */ = {
+		3008E6EA1BB6BC8500A865FC /* Content（内容） */ = {
 			isa = PBXGroup;
 			children = (
 				3008E6EB1BB6BC8500A865FC /* Controller */,
 				3008E6EE1BB6BC8500A865FC /* Model */,
 				3008E6EF1BB6BC8500A865FC /* View */,
 			);
+			name = "Content（内容）";
 			path = Content;
 			sourceTree = "<group>";
 		};
@@ -752,6 +753,36 @@
 				3008E6F61BB6BDFC00A865FC /* Reachability.m */,
 			);
 			path = Reachability;
+			sourceTree = "<group>";
+		};
+		3008E6FB1BB6F8A700A865FC /* CssFileTool */ = {
+			isa = PBXGroup;
+			children = (
+				3008E6DE1BB6BC7700A865FC /* XSCssFile.h */,
+				3008E6DF1BB6BC7700A865FC /* XSCssFile.m */,
+			);
+			name = CssFileTool;
+			sourceTree = "<group>";
+		};
+		3008E6FC1BB6F8B600A865FC /* VCRequest（业务请求） */ = {
+			isa = PBXGroup;
+			children = (
+				3008E6E21BB6BC7700A865FC /* XSResultTool.h */,
+				3008E6E31BB6BC7700A865FC /* XSResultTool.m */,
+			);
+			name = "VCRequest（业务请求）";
+			sourceTree = "<group>";
+		};
+		3008E6FE1BB6F8E300A865FC /* HttpTool（网络请求） */ = {
+			isa = PBXGroup;
+			children = (
+				3008E6E01BB6BC7700A865FC /* XSHttpTool.h */,
+				3008E6E11BB6BC7700A865FC /* XSHttpTool.m */,
+				3008E6E41BB6BC7700A865FC /* XSTestNet.h */,
+				3008E6E51BB6BC7700A865FC /* XSTestNet.m */,
+				3008E6FC1BB6F8B600A865FC /* VCRequest（业务请求） */,
+			);
+			name = "HttpTool（网络请求）";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -909,6 +940,7 @@
 				3008E6A01BB3BEE100A865FC /* UIImageView+WebCache.m in Sources */,
 				3008E63E1BB2CFE500A865FC /* AFURLResponseSerialization.m in Sources */,
 				3008E69C1BB3BEE100A865FC /* UIImage+GIF.m in Sources */,
+				30FAF7971BB9675100154B3A /* NSString+XSDate.m in Sources */,
 				3008E5CA1BB290A800A865FC /* main.m in Sources */,
 				3008E64C1BB2CFE500A865FC /* MJRefreshConst.m in Sources */,
 				3008E6391BB2CFE500A865FC /* AFHTTPSessionManager.m in Sources */,

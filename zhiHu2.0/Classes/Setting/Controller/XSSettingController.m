@@ -12,7 +12,8 @@
 
 #import "XSSetting.h"
 
-#import "UIBarButtonItem+XSNaviItem.h"
+#import "UIImageView+WebCache.h"
+#import "MBProgressHUD+Extend.h"
 
 @interface XSSettingController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -92,8 +93,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
     if (section == 1) {
-        NSString *aboutStr = @"Created By Luciferxs.";
-        return aboutStr;
+        return @"Created By Luciferxs.";;
     }
     return nil;
 }
@@ -101,15 +101,25 @@
 #pragma mark - table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1) {
+    //点击清除缓存
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        // 停止所有的下载
+        [[SDWebImageManager sharedManager] cancelAll];
+        // 删除缓存
+        [[SDWebImageManager sharedManager].imageCache clearMemory];
         
+        [MBProgressHUD showSuccess:@"已清除"];
+
+    }
+    
+    if (indexPath.section == 1) {
+    
         if (indexPath.row == 0) {
             //进入捐献界面
             XSDonateController *vc = [[XSDonateController alloc] init];
             vc.title = @"捐赠";
             vc.view.backgroundColor = [UIColor whiteColor];
             [self.navigationController pushViewController:vc animated:YES];
-            
         }else{
             //进入关于界面
             XSAboutController *vc = [[XSAboutController alloc] init];

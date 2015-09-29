@@ -45,7 +45,7 @@
 }
 
 
-/** 返回cssUrl的内容 */
+/** 返回cssURL的内容 */
 + (NSString *)getoOldCssUrl
 {
     return [NSString stringWithContentsOfFile:cssUrlPath encoding:NSUTF8StringEncoding error:nil];;

@@ -13,6 +13,7 @@
 #import "XSContentController.h"
 
 #import "UIBarButtonItem+XSNaviItem.h"
+#import "NSString+XSDate.h"
 #import "MJRefresh.h"
 #import "SDCycleScrollView.h"
 
@@ -27,10 +28,11 @@
 
 @property (nonatomic,weak) SDCycleScrollView *topStoriesView;
 
-/** 存放故事模型的数组 */
-@property (nonatomic,strong) NSMutableArray *storiesArray;
-/** 存放顶部故事模型的数组 */
-@property (nonatomic,strong) NSMutableArray *topStoriesArray;
+/** 存放结果模型 包含了故事模型和顶部故事模型 */
+@property (nonatomic,strong) NSMutableArray *todayArray;
+
+/** 下拉刷新次数 */
+@property (nonatomic,assign) NSInteger footRefreshTimes;
 
 @end
 
@@ -40,7 +42,8 @@
 -(UITableView *)tableView
 {
     if (!_tableView) {
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
+        //组样式表格
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height) style:UITableViewStyleGrouped];
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         tableView.delegate = self;
         tableView.dataSource = self;
@@ -56,55 +59,101 @@
     return _tableView;
 }
 
+-(NSMutableArray *)todayArray
+{
+    if (!_todayArray) {
+        _todayArray = [NSMutableArray array];
+    }
+    return _todayArray;
+}
+
+
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"首页";
-    
-    //导航按钮组件
+
+    //设置标题按钮 和 导航按钮
+    [self setUpTitleBtn];
     [self setUpNaviBarItems];
     
-    //表格刷新组件
+    //设置表格刷新组件
     [self.view addSubview:self.tableView];
-    
     [self.tableView addHeaderWithTarget:self action:@selector(getNewStories)];
-    
     [self.tableView headerBeginRefreshing];
+    [self.tableView addFooterWithTarget:self action:@selector(getOldStories)];
     
 }
 
 #pragma mark - 后台获取最新故事
 -(void)getNewStories
 {
-    [XSResultTool getNewStoriesForSuccess:^(NSArray *storiesArray, NSArray *topStoriesArray) {
-        
+    [XSResultTool getNewDictForSuccess:^(XSResult *result) {
+
         [self.tableView headerEndRefreshing];
         
-        _storiesArray = (NSMutableArray *)storiesArray;
-        _topStoriesArray = (NSMutableArray *)topStoriesArray;
-
-        //给顶部视图赋值
-        _topStoriesView.topStoriesArray = _topStoriesArray;
+        if (self.todayArray.count == 0) {
+            //下拉刷新第一次加载
+            [self.todayArray addObject:result];
+        }else{
+            //多次下拉刷新 先移除旧的最新的模型 再在最前面加入最新模型
+            [self.todayArray removeObjectAtIndex:0];
+            [self.todayArray insertObject:result atIndex:0];
+        }
         
+        _topStoriesView.topStoriesArray = (NSMutableArray *)result.top_stories;
         
         [self.tableView reloadData];
-        
         
     } failure:^(NSError *error) {
         XSLog(@"%@",error);
     }];
 }
 
+#pragma mark - 后台获取旧故事
+-(void)getOldStories
+{
+    //每次下拉刷新加1
+    _footRefreshTimes++;
+    //获得之前一天日期的字符串封装成NSNumber
+    NSString *todayDateStr = [NSString stringWithToday];
+    NSNumber *dateNum = [NSNumber numberWithLongLong:(todayDateStr.longLongValue - _footRefreshTimes)];
+    
+    XSResultTool *resultTool = [[XSResultTool alloc] init];
+    resultTool.dateStr = dateNum.stringValue;
+    
+    [resultTool getOldDictForSuccess:^(XSResult *result) {
+        
+        [self.tableView footerEndRefreshing];
+        [self.todayArray addObject:result];
+        [self.tableView reloadData];
+        
+    } failure:^(NSError *error) {
+        XSLog(@"%@",error);
+    }];
+}
+
+#pragma mark - 设置标题按钮刷新界面
+-(void)setUpTitleBtn
+{
+    UIButton *titleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [titleBtn setTitle:@"首页" forState:UIControlStateNormal];
+    titleBtn.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:18.0];
+    [titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [titleBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
+    [titleBtn addTarget:self.tableView action:@selector(headerBeginRefreshing) forControlEvents:UIControlEventTouchUpInside];
+    [titleBtn sizeToFit];
+    self.navigationItem.titleView = titleBtn;
+}
+
 #pragma mark - 设置导航栏按钮
 -(void)setUpNaviBarItems
 {
     //左边收藏按钮
-    UIBarButtonItem *leftItem = [UIBarButtonItem buttonWithTarget:self action:@selector(favoTapped) forControlEvent:UIControlEventTouchUpInside title:@"收藏"];
+    UIBarButtonItem *leftItem = [UIBarButtonItem buttonWithTarget:self action:@selector(favoTapped) forControlEvent:UIControlEventTouchUpInside image:[UIImage imageNamed:@"navi_favo"]];
     self.navigationItem.leftBarButtonItem = leftItem;
     
     //右边设置按钮
-    UIBarButtonItem *rightItem = [UIBarButtonItem buttonWithTarget:self action:@selector(settingTapped) forControlEvent:UIControlEventTouchUpInside title:@"设置"];
-//    UIBarButtonItem *rightItem = [UIBarButtonItem buttonWithTarget:self action:@selector(settingTapped) forControlEvent:UIControlEventTouchUpInside image:[UIImage imageNamed:@"settingIcon"]];
+    UIBarButtonItem *rightItem = [UIBarButtonItem buttonWithTarget:self action:@selector(settingTapped) forControlEvent:UIControlEventTouchUpInside image:[UIImage imageNamed:@"navi_setting"]];
     self.navigationItem.rightBarButtonItem = rightItem;
 }
 
@@ -121,24 +170,34 @@
 }
 
 #pragma mark - Table view data source
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    // Return the number of sections.
-//    return self.storiesArray.count;
-//}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return  self.todayArray.count;
+}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _storiesArray.count;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    XSResult *result = self.todayArray[section];
+    return result.stories.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XSStoriesCell *cell = [XSStoriesCell storiesCellWithTableView:tableView];
     
-    XSStories *stories = _storiesArray[indexPath.row];
+    XSResult *result = self.todayArray[indexPath.section];
+    XSStories *stories = result.stories[indexPath.row];
     cell.storiesModel = stories;
-    
     return cell;
-    
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return nil;
+    }
+    XSResult *result = self.todayArray[section];
+    return result.date;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -149,20 +208,17 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    XSStories *stories = _storiesArray[indexPath.row];
+    XSResult *result = self.todayArray[indexPath.section];
+    XSStories *stories = result.stories[indexPath.row];
     NSString *idStr = stories.id.stringValue;
     XSContentController *contentVC = [XSContentController contentViewWithStoiresId:idStr];
     [self.navigationController pushViewController:contentVC animated:YES];
 }
 
-
 #pragma mark - 顶部视图的代理
 -(void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSUInteger)index topStoiresIdStr:(NSString *)idStr
 {
     XSContentController *contentVC = [XSContentController contentViewWithStoiresId:idStr];
-    
     [self.navigationController pushViewController:contentVC animated:YES];
-    
-    
 }
 @end
