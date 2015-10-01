@@ -87,6 +87,7 @@
 		3008E6F71BB6BDFC00A865FC /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3008E6F61BB6BDFC00A865FC /* Reachability.m */; };
 		3008E6FA1BB6D27400A865FC /* XSContentResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 3008E6F91BB6D27400A865FC /* XSContentResult.m */; };
 		30FAF7971BB9675100154B3A /* NSString+XSDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FAF7961BB9675100154B3A /* NSString+XSDate.m */; };
+		30FEFE961BBD12FC00AE084D /* XSCellHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FEFE951BBD12FC00AE084D /* XSCellHeadView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -262,6 +263,8 @@
 		3008E6F91BB6D27400A865FC /* XSContentResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSContentResult.m; sourceTree = "<group>"; };
 		30FAF7951BB9675100154B3A /* NSString+XSDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XSDate.h"; sourceTree = "<group>"; };
 		30FAF7961BB9675100154B3A /* NSString+XSDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XSDate.m"; sourceTree = "<group>"; };
+		30FEFE941BBD12FC00AE084D /* XSCellHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XSCellHeadView.h; sourceTree = "<group>"; };
+		30FEFE951BBD12FC00AE084D /* XSCellHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSCellHeadView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -423,6 +426,8 @@
 			children = (
 				3008E66D1BB3BB3E00A865FC /* XSStoriesCell.h */,
 				3008E66E1BB3BB3E00A865FC /* XSStoriesCell.m */,
+				30FEFE941BBD12FC00AE084D /* XSCellHeadView.h */,
+				30FEFE951BBD12FC00AE084D /* XSCellHeadView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -930,6 +935,7 @@
 				3008E6F31BB6BCE400A865FC /* XSToolView.m in Sources */,
 				3008E66F1BB3BB3E00A865FC /* XSStoriesCell.m in Sources */,
 				3008E5D11BB2916E00A865FC /* XSNavigationController.m in Sources */,
+				30FEFE961BBD12FC00AE084D /* XSCellHeadView.m in Sources */,
 				3008E69F1BB3BEE100A865FC /* UIImageView+HighlightedWebCache.m in Sources */,
 				3008E64B1BB2CFE500A865FC /* MJRefreshBaseView.m in Sources */,
 				3008E6621BB2D51F00A865FC /* XSTopStories.m in Sources */,

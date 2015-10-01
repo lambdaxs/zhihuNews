@@ -21,6 +21,7 @@
 #import "XSStories.h"
 #import "XSTopStories.h"
 #import "XSStoriesCell.h"
+#import "XSCellHeadView.h"
 
 @interface XSHomeController ()<UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate>
 
@@ -170,17 +171,18 @@
 }
 
 #pragma mark - Table view data source
+/** 组数 */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return  self.todayArray.count;
 }
-
+/** 每组行数 */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     XSResult *result = self.todayArray[section];
     return result.stories.count;
 }
-
+/** 设置具体的cell */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XSStoriesCell *cell = [XSStoriesCell storiesCellWithTableView:tableView];
@@ -190,22 +192,28 @@
     cell.storiesModel = stories;
     return cell;
 }
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    if (section == 0) {
-        return nil;
-    }
-    XSResult *result = self.todayArray[section];
-    return result.date;
-}
-
+/** 设置每个cell的高度 */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return cellHight;
 }
+/** 设置头视图 */
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 0)return nil;
+    XSResult *result = self.todayArray[section];
+    XSCellHeadView *view = [XSCellHeadView cellHeadViewWithFrame:CGRectMake(0, 0, self.view.width, XSCellHeadViewHeight)];
+    view.dateStr = result.date;
+    return view;
+}
+/** 头视图高度 */
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return section == 0 ? 0 : XSCellHeadViewHeight;
+}
 
 #pragma mark - Table view delegate
+/** 点击cell后跳转 */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XSResult *result = self.todayArray[indexPath.section];
