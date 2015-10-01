@@ -113,13 +113,13 @@
 -(void)getOldStories
 {
     //每次下拉刷新加1
-    _footRefreshTimes++;
-    //获得之前一天日期的字符串封装成NSNumber
-    NSString *todayDateStr = [NSString stringWithToday];
-    NSNumber *dateNum = [NSNumber numberWithLongLong:(todayDateStr.longLongValue - _footRefreshTimes)];
     
+    //获得n天前的日期字符串
+    
+    NSString *dateStr = [NSString getThePastDayWithNumber:(_footRefreshTimes++)];
+
     XSResultTool *resultTool = [[XSResultTool alloc] init];
-    resultTool.dateStr = dateNum.stringValue;
+    resultTool.dateStr = dateStr;
     
     [resultTool getOldDictForSuccess:^(XSResult *result) {
         

@@ -18,6 +18,9 @@
 #define imgWidth 65.0
 /** 图片高度 */
 #define imgHight 65.0
+/** cell分割线宽度 */
+#define cellLineWidth 0.8f
+
 
 @interface XSStoriesCell ()
 
@@ -36,16 +39,20 @@
     [super setSelected:selected animated:animated];
 }
 
+#pragma mark - 重绘cell下面的线条
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
-    CGContextFillRect(context, rect);
-    //上分割线，
-//    CGContextSetStrokeColorWithColor(context, [UIColor grayColor].CGColor);
-//    CGContextStrokeRect(context, CGRectMake(5, -1, rect.size.width - 10, 1));
-    //下分割线
-    CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1.0].CGColor);
-    CGContextStrokeRect(context, CGRectMake(margin, rect.size.height, rect.size.width - 2*margin, margin));
+    //设置颜色
+    CGContextSetRGBStrokeColor(context, 225/255.0, 225/255.0, 225/255.0, 1.0);
+    //设置线宽
+    CGContextSetLineWidth(context, cellLineWidth);
+    //设置一起点
+    CGContextMoveToPoint(context, margin, rect.size.height - cellLineWidth);
+    //设置连线另一个点
+    CGContextAddLineToPoint(context, rect.size.width - margin, rect.size.height - cellLineWidth);
+    //画到view [渲染]
+    CGContextStrokePath(context);
+
 }
 
 #pragma mark - get customCell

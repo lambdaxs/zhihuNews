@@ -16,4 +16,8 @@
 /** 返回今天日期的字符串 */
 + (NSString *)stringWithToday;
 
+/** 返回前n天的日期Str */
++ (NSString *)getThePastDayWithNumber:(NSInteger)number;
+
+
 @end

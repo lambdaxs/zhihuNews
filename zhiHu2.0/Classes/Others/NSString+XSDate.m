@@ -26,4 +26,15 @@
     return destDateString;
 }
 
++ (NSString *)getThePastDayWithNumber:(NSInteger)number
+{
+    //判断是否在早上6点前 在6点前返回
+
+    NSDate *pastDay = [NSDate dateWithTimeIntervalSinceNow:-(24*60*60*number)];
+    NSDateFormatter *dft = [[NSDateFormatter alloc] init];
+    [dft setDateFormat:@"yyyyMMdd"];
+    return [dft stringFromDate:pastDay];;
+}
+
+
 @end
