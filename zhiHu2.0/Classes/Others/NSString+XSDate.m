@@ -26,12 +26,38 @@
 
 + (NSString *)getThePastDayWithNumber:(NSInteger)number
 {
-    //知乎服务每天新的推送时间为6点
     NSDateFormatter *dft = [[NSDateFormatter alloc] init];
     [dft setDateFormat:@"yyyyMMdd"];
-    NSDate *pastDay = [NSDate dateWithTimeIntervalSinceNow:-(number*24*60*60)];
+    NSDate *pastDay;
+    
+    if ([self isPastSixHours]) {
+        //超过6点正常返回值
+        pastDay = [NSDate dateWithTimeIntervalSinceNow:-(number*24*3600)];
+    }else{
+        //0---6点跳着返回值
+        pastDay = [NSDate dateWithTimeIntervalSinceNow:-(number++)*24*3600];
+    }
 
     return [dft stringFromDate:pastDay];
+}
+
+/** 判断是否处在一天的0----6点 */
++ (BOOL)isPastSixHours
+{
+    NSDate *yesterDay = [NSDate dateWithTimeIntervalSinceNow:-(24*60*60)];
+    NSDate *sixHour = [NSDate dateWithTimeIntervalSinceNow:-(6*60*60)];
+    
+    NSDateFormatter *dft = [[NSDateFormatter alloc] init];
+    [dft setDateFormat:@"yyyyMMdd"];
+    
+    NSString *yesterdayStr = [dft stringFromDate:yesterDay];
+    NSString *sixhourStr = [dft stringFromDate:sixHour];
+    
+    if ([yesterdayStr isEqualToString:sixhourStr]) {
+        return NO;
+    }else{
+        return YES;
+    }
 }
 
 
