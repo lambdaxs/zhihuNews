@@ -16,34 +16,19 @@
 #import "XSContentResult.h"
 
 /** 获取最新消息 */
-#define newStoiresURL @"http://news-at.zhihu.com/api/4/news/latest"
+#define NEW_URL @"http://news-at.zhihu.com/api/4/news/latest"
+
+#define OLD_URL @"http://news.at.zhihu.com/api/4/news/before/"
+
+#define CONTENT_URL @"http://news-at.zhihu.com/api/4/news/"
 
 
 @implementation XSResultTool
 
-+ (void)getNewStoriesForSuccess:(void (^)(NSArray *, NSArray *))success failure:(void (^)(NSError *))failure
-{
-    [XSHttpTool GET:newStoiresURL parameters:nil success:^(id responseObject) {
-        //请求成功传两个数组到外层代码中
-        
-        //字典转模型
-        XSResult *result = [XSResult objectWithKeyValues:responseObject];
-        
-        if (success) {
-            success(result.stories,result.top_stories);
-        }
-        
-        
-    } failure:^(NSError *error) {
-        if (failure) {
-            failure(error);
-        }
-    }];
-}
-
+/** 请求最新故事 */
 + (void)getNewDictForSuccess:(void (^)(XSResult *))success failure:(void (^)(NSError *))failure
 {
-    [XSHttpTool GET:newStoiresURL parameters:nil success:^(id responseObject) {
+    [XSHttpTool GET:NEW_URL parameters:nil success:^(id responseObject) {
         //请求成功传两个数组到外层代码中
         
         //字典转模型
@@ -59,12 +44,12 @@
         }
     }];
 }
-
+/** 请求以前的故事 */
 - (void)getOldDictForSuccess:(void (^)(XSResult *))success failure:(void (^)(NSError *))failure
 {
-    NSString *oldStoiresURL = [@"http://news.at.zhihu.com/api/4/news/before/" stringByAppendingString:_dateStr];
+    NSString *oldURL = [OLD_URL stringByAppendingString:_dateStr];
     
-    [XSHttpTool GET:oldStoiresURL parameters:nil success:^(id responseObject) {
+    [XSHttpTool GET:oldURL parameters:nil success:^(id responseObject) {
         XSResult *result = [XSResult objectWithKeyValues:responseObject];
         if (success) {
             success(result);
@@ -76,27 +61,10 @@
         }
     }];
 }
-
-- (void)getOldStoriesForSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure
-{
-    NSString *oldStoiresURL = [@"http://news.at.zhihu.com/api/4/news/before/" stringByAppendingString:_dateStr];
-    
-    [XSHttpTool GET:oldStoiresURL parameters:nil success:^(id responseObject) {
-        XSResult *result = [XSResult objectWithKeyValues:responseObject];
-        if (success) {
-            success(result.stories);
-        }
-        
-    } failure:^(NSError *error) {
-        if (failure) {
-            failure(error);
-        }
-    }];
-}
-
+/** 请求故事内容 */
 - (void)getStoriesContentWithSuccess:(void (^)(NSString *))success failure:(void (^)(NSError *))failure
 {
-    NSString *contentURL = [@"http://news-at.zhihu.com/api/4/news/" stringByAppendingString:_stoiresId];
+    NSString *contentURL = [CONTENT_URL stringByAppendingString:_stoiresId];
     
     [XSHttpTool GET:contentURL parameters:nil success:^(id responseObject) {
         

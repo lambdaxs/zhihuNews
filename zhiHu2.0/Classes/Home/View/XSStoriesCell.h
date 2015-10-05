@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 /** cell高度 */
-#define cellHight 85.0
+#define CELL_HEIGHT 85.0
 
 
 @class XSStories;

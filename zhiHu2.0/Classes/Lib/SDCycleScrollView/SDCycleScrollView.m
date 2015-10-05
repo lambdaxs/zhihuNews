@@ -60,10 +60,10 @@ NSString * const ID = @"cycleCell";
 - (void)initialization
 {
     _pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
-    _autoScrollTimeInterval = 2.0;//切换时长
+    _autoScrollTimeInterval = 4.0;//切换时长
     _titleLabelTextColor = [UIColor whiteColor];
     _titleLabelTextFont= [UIFont fontWithName:@"Helvetica" size:17.0];
-    _titleLabelBackgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
+    _titleLabelBackgroundColor = RGBA(0, 0, 0, 0.15);
     _titleLabelHeight = 60;
     _autoScroll = YES;
     _infiniteLoop = YES;
@@ -71,7 +71,7 @@ NSString * const ID = @"cycleCell";
     _pageControlDotSize = CGSizeMake(10, 10);
     _pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
     
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor clearColor];
     
 }
 

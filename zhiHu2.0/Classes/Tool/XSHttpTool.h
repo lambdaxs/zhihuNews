@@ -11,8 +11,10 @@
 
 @interface XSHttpTool : NSObject
 
+/** 封装GET请求 */
 + (void)GET:(NSString *)URLString parameters:(id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
 
+/** 封装POST请求 */
 + (void)POST:(NSString *)URLString parameters:(id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
 
 @end

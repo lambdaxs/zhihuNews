@@ -8,14 +8,15 @@
 
 #import <UIKit/UIKit.h>
 /** 工具栏高度 */
-#define XSToolHeight 35
+#define TOOL_H 35
 
 /** 按钮类型的结构体 tag从94开始 */
 typedef enum {
     XSPopBtn = 94,
     XSFavoBtn,
     XSDownloadBtn,
-    XSComBtn
+    XSComBtn,
+    XSShareBtn
 }XSToolBtnType;
 
 @class XSToolView;

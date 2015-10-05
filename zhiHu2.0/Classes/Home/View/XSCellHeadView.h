@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
-#define XSCellHeadViewHeight 35.0f
+/** cell头视图高度 */
+#define CELL_HEAD_HEIGHT 35.0f
 
 @interface XSCellHeadView : UIView
 
+/** 要传入的日期字符串 */
 @property (nonatomic,copy) NSString *dateStr;
 
+/** 初始化类方法 */
 + (instancetype)cellHeadViewWithFrame:(CGRect)frame;
 
 @end

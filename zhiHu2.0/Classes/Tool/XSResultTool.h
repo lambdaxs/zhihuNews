@@ -19,15 +19,10 @@
 // >>>>>>>>>>>>>>>>>>>>首页控制器的业务请求
 
 /** 获取最新故事的请求 */
-+ (void)getNewStoriesForSuccess:(void (^)(NSArray *storiesArray,NSArray *topStoriesArray))success failure:(void (^)(NSError *error))failure;
-
 + (void)getNewDictForSuccess:(void (^)(XSResult *result))success failure:(void (^)(NSError *error))failure;
 
 /** 获取旧故事的请求 */
-- (void)getOldStoriesForSuccess:(void (^)(NSArray *storiesArray))success failure:(void (^)(NSError *error))failure;
-
 - (void)getOldDictForSuccess:(void (^)(XSResult *result))success failure:(void (^)(NSError *error))failure;
-
 
 
 // >>>>>>>>>>>>>>>>>>>>内容控制器的业务请求

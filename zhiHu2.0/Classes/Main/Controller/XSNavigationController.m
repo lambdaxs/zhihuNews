@@ -59,7 +59,7 @@
 -(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     if (self.childViewControllers.count) {
-        UIBarButtonItem *leftItem = [UIBarButtonItem buttonWithTarget:self action:@selector(popBack) forControlEvent:UIControlEventTouchUpInside image:[UIImage imageNamed:@"navi_back"]];
+        UIBarButtonItem *leftItem = [UIBarButtonItem buttonWithTarget:self action:@selector(popBack) forControlEvent:UIControlEventTouchUpInside image:[UIImage imageNamed:@"navi_back"] selImage:[UIImage imageNamed:@"navi_back_sel"]];
         viewController.navigationItem.leftBarButtonItem = leftItem;
     }
     //进入故事详情界面时 隐藏naviBar

@@ -19,11 +19,10 @@
 
 @property (nonatomic,strong) UIWebView *webView;
 
-//@property (nonatomic,weak) UIView *tempView;
-
 /** 接收的内容Url */
 @property (nonatomic,copy) NSString *storiesId;
 
+@property (nonatomic,strong) UIView *transView;
 
 @end
 
@@ -33,17 +32,11 @@
 {
     if (!_webView) {
         //承载webView的一个view 在滚动web时上面的状态栏不会遮挡住web内容
-        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, self.view.width, self.view.height - (XSToolHeight + 20))];
+        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, self.view.width, self.view.height - (TOOL_H + 20))];
         [bgView setBackgroundColor:[UIColor whiteColor]];
         [self.view addSubview:bgView];
         _webView = [[UIWebView alloc] initWithFrame:bgView.bounds];
         _webView.delegate = self;
-        
-        //添加底部工具栏
-        XSToolView *toolBar = [XSToolView sharedInstance];
-        toolBar.delegate = self;
-        [self.view addSubview:toolBar];
-        
         [bgView addSubview:_webView];
     }
     return _webView;
@@ -54,7 +47,6 @@
 {
     XSContentController *contentVC = [[self alloc] init];
     contentVC.storiesId = storiesId;
-    [MBProgressHUD showMessage:@"正在加载..."];
     return contentVC;
 }
 
@@ -62,15 +54,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    //添加底部工具栏
+    XSToolView *toolBar = [XSToolView sharedInstance];
+    toolBar.delegate = self;
+    [self.view addSubview:toolBar];
+    
+#warning mark - 等待动画 抽取出去复用
+    UIView *transView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    transView.center = self.view.center;
+    [transView setBackgroundColor:RGB(1, 120, 216)];
+    [self.view addSubview:transView];
+    [self setUpWaitAnimationWithView:transView];
+    _transView = transView;
+    
+}
+#pragma mark - 设置等待旋转动画
+- (void)setUpWaitAnimationWithView:(UIView *)view
+{
+    CABasicAnimation* rotationAnimation;
+    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 ];
+    rotationAnimation.duration = 3.0;
+    rotationAnimation.cumulative = YES;
+    rotationAnimation.repeatCount = 10;
+    [view.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
 }
 
 #pragma mark - 为故事id赋值 然后加载内容
 -(void)setStoriesId:(NSString *)storiesId
 {
     _storiesId = storiesId;
-    
     XSResultTool *resultTool = [[XSResultTool alloc] init];
     resultTool.stoiresId = storiesId;
+    
     [resultTool getStoriesContentWithSuccess:^(NSString *htmlStr) {
         [MBProgressHUD hideHUD];
         //加载网页
@@ -78,7 +95,6 @@
         
     } failure:^(NSError *error) {
         XSLog(@"%@",error);
-        [MBProgressHUD hideHUD];
         [MBProgressHUD showError:@"网络连接不稳定"];
 
     }];
@@ -86,14 +102,14 @@
 }
 
 #pragma mark - implement UIWebViewDelegate
+
 -(void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    [MBProgressHUD hideHUD];
+    [_transView removeFromSuperview];
 }
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    [MBProgressHUD hideHUD];
     [MBProgressHUD showError:@"网络连接不稳定"];
 }
 
@@ -114,7 +130,9 @@
             break;
         case XSComBtn:
             [MBProgressHUD showSuccess:@"评论"];
-
+            break;
+        case XSShareBtn:
+            [MBProgressHUD showSuccess:@"分享"];
             break;
     }
     

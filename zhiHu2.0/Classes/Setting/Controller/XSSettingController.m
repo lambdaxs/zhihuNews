@@ -11,11 +11,12 @@
 #import "XSDonateController.h"
 
 #import "XSSetting.h"
+#import "XSRemoveCache.h"
 
 #import "UIImageView+WebCache.h"
 #import "MBProgressHUD+Extend.h"
 
-@interface XSSettingController ()<UITableViewDataSource,UITableViewDelegate>
+@interface XSSettingController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 
@@ -74,10 +75,15 @@
     static NSString *reuseId = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseId];
     }
     
     if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            [XSRemoveCache saveCacheSize];
+            NSString *str = [XSRemoveCache getCacheSizeFile];
+            cell.detailTextLabel.text = str;
+        }
         cell.textLabel.text = self.settingModel.setting[indexPath.row];
 
     }else{
@@ -108,8 +114,9 @@
         // 删除缓存
         [[SDWebImageManager sharedManager].imageCache clearMemory];
         
-        [MBProgressHUD showSuccess:@"已清除"];
-
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定清除缓存？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+        [alert show];
+       
     }
     
     if (indexPath.section == 1) {

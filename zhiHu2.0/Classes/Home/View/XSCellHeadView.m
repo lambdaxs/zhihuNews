@@ -21,6 +21,7 @@
     if (!_dateLabel) {
         _dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.width, self.height)];
         [_dateLabel setTextColor:[UIColor whiteColor]];
+        _dateLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_dateLabel];
     }
     return _dateLabel;
@@ -29,11 +30,12 @@
 + (instancetype)cellHeadViewWithFrame:(CGRect)frame
 {
     XSCellHeadView *headView = [[self alloc] init];
-    headView.backgroundColor = [UIColor colorWithRed:1/255.0 green:120/255.0 blue:216/255.0 alpha:1.0];
+    headView.backgroundColor = RGB(1, 120, 216);//知乎蓝
     headView.frame = frame;
     return headView;
 }
 
+#pragma mark - 处理字符串业务
 -(void)setDateStr:(NSString *)dateStr
 {
     _dateStr = dateStr;
@@ -54,8 +56,6 @@
     NSInteger weekNum = [dayComponents weekday];
     NSArray *weekArr = @[@"error",@"星期天",@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六"];
     
-    
-//    self.dateLabel.text = weekArr[weekNum];
     self.dateLabel.text = [NSString stringWithFormat:@"%@月%@日%@",monthStr,dayStr,weekArr[weekNum]];
 }
 

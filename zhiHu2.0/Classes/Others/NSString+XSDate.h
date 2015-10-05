@@ -19,5 +19,4 @@
 /** 返回前n天的日期Str */
 + (NSString *)getThePastDayWithNumber:(NSInteger)number;
 
-
 @end

@@ -21,16 +21,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    [window makeKeyAndVisible];
-    self.window = window;
-    
     XSHomeController *homeVC = [[XSHomeController alloc] init];
     XSNavigationController *naviVC  = [[XSNavigationController alloc] initWithRootViewController:homeVC];
     
-    window.rootViewController = naviVC;
-    
+    UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [window setRootViewController:naviVC];
+    [window makeKeyAndVisible];
+    self.window = window;
     
     return YES;
 }

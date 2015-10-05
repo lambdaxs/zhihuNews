@@ -21,10 +21,11 @@
     return [[UIBarButtonItem alloc] initWithCustomView:btn];
 }
 
-+(UIBarButtonItem *)buttonWithTarget:(id)target action:(SEL)action forControlEvent:(UIControlEvents)controlEvent image:(UIImage *)image
++(UIBarButtonItem *)buttonWithTarget:(id)target action:(SEL)action forControlEvent:(UIControlEvents)controlEvent image:(UIImage *)image selImage:(UIImage *)selImage
 {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setBackgroundImage:image forState:UIControlStateNormal];
+    [btn setBackgroundImage:selImage forState:UIControlStateHighlighted];
     [btn sizeToFit];
     [btn addTarget:target action:action forControlEvents:controlEvent];
     return [[UIBarButtonItem alloc] initWithCustomView:btn];
