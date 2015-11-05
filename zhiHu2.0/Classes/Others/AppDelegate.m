@@ -10,8 +10,11 @@
 
 #import "XSNavigationController.h"
 #import "XSHomeController.h"
+#import "YFStartView.h"
 
-#import "UIImageView+WebCache.h"
+#import "SDWebImageManager.h"
+#import "XSResultTool.h"
+#import "MJExtension.h"
 
 @interface AppDelegate ()
 
@@ -23,11 +26,31 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     XSHomeController *homeVC = [[XSHomeController alloc] init];
     XSNavigationController *naviVC  = [[XSNavigationController alloc] initWithRootViewController:homeVC];
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.rootViewController = naviVC;
+    [self.window makeKeyAndVisible];
     
-    UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    [window setRootViewController:naviVC];
-    [window makeKeyAndVisible];
-    self.window = window;
+//    NSURLRequest *request1 = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.xsdota.com/wangge/api/v1/news.json"]];
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request1 completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//        id jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+//        NSLog(@"%@",jsonData);
+//    }];
+//    [dataTask resume];
+    
+    YFStartView *launchView = [YFStartView startView];
+    launchView.backgroundColor = [UIColor whiteColor];
+    
+    NSURL *url = [NSURL URLWithString:@"http://news-at.zhihu.com/api/4/start-image/480*748"];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    
+    launchView.launchImageURL = [responseDict valueForKey:@"img"];
+    [launchView configYFStartView];
+
+
+    
     
     return YES;
 }

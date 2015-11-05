@@ -19,4 +19,6 @@
 /** 返回前n天的日期Str */
 + (NSString *)getThePastDayWithNumber:(NSInteger)number;
 
+/** 处理字符串格式化成cell头视图的格式 */
++ (NSString *)dateStrForHeadViewWith:(NSString *)dateStr;
 @end

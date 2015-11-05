@@ -86,8 +86,11 @@
 		3008E6F31BB6BCE400A865FC /* XSToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3008E6F21BB6BCE400A865FC /* XSToolView.m */; };
 		3008E6F71BB6BDFC00A865FC /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3008E6F61BB6BDFC00A865FC /* Reachability.m */; };
 		3008E6FA1BB6D27400A865FC /* XSContentResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 3008E6F91BB6D27400A865FC /* XSContentResult.m */; };
+		3044860B1BDFD71200FD8091 /* YFStartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3044860A1BDFD71200FD8091 /* YFStartView.m */; settings = {ASSET_TAGS = (); }; };
+		309BF07F1BDE272900B8A5B6 /* RTSpinKitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 309BF07E1BDE272900B8A5B6 /* RTSpinKitView.m */; settings = {ASSET_TAGS = (); }; };
+		30A24AA61BD0AA2E00A88709 /* XSCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 30A24AA51BD0AA2E00A88709 /* XSCacheTool.m */; settings = {ASSET_TAGS = (); }; };
+		30E44DD21BD3F99B00E2F1EF /* XSHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E44DD11BD3F99B00E2F1EF /* XSHeadView.m */; settings = {ASSET_TAGS = (); }; };
 		30FAF7971BB9675100154B3A /* NSString+XSDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FAF7961BB9675100154B3A /* NSString+XSDate.m */; };
-		30FEFE961BBD12FC00AE084D /* XSCellHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FEFE951BBD12FC00AE084D /* XSCellHeadView.m */; };
 		30FEFE991BBD2BDD00AE084D /* XSRemoveCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FEFE981BBD2BDD00AE084D /* XSRemoveCache.m */; };
 /* End PBXBuildFile section */
 
@@ -262,10 +265,16 @@
 		3008E6F61BB6BDFC00A865FC /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		3008E6F81BB6D27400A865FC /* XSContentResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XSContentResult.h; sourceTree = "<group>"; };
 		3008E6F91BB6D27400A865FC /* XSContentResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSContentResult.m; sourceTree = "<group>"; };
+		304486091BDFD71200FD8091 /* YFStartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFStartView.h; sourceTree = "<group>"; };
+		3044860A1BDFD71200FD8091 /* YFStartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFStartView.m; sourceTree = "<group>"; };
+		309BF07D1BDE272900B8A5B6 /* RTSpinKitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTSpinKitView.h; sourceTree = "<group>"; };
+		309BF07E1BDE272900B8A5B6 /* RTSpinKitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTSpinKitView.m; sourceTree = "<group>"; };
+		30A24AA41BD0AA2E00A88709 /* XSCacheTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XSCacheTool.h; sourceTree = "<group>"; };
+		30A24AA51BD0AA2E00A88709 /* XSCacheTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSCacheTool.m; sourceTree = "<group>"; };
+		30E44DD01BD3F99B00E2F1EF /* XSHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XSHeadView.h; sourceTree = "<group>"; };
+		30E44DD11BD3F99B00E2F1EF /* XSHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSHeadView.m; sourceTree = "<group>"; };
 		30FAF7951BB9675100154B3A /* NSString+XSDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XSDate.h"; sourceTree = "<group>"; };
 		30FAF7961BB9675100154B3A /* NSString+XSDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XSDate.m"; sourceTree = "<group>"; };
-		30FEFE941BBD12FC00AE084D /* XSCellHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XSCellHeadView.h; sourceTree = "<group>"; };
-		30FEFE951BBD12FC00AE084D /* XSCellHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSCellHeadView.m; sourceTree = "<group>"; };
 		30FEFE971BBD2BDD00AE084D /* XSRemoveCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XSRemoveCache.h; sourceTree = "<group>"; };
 		30FEFE981BBD2BDD00AE084D /* XSRemoveCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSRemoveCache.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -288,6 +297,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3003C6331BD60A150042339A /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
 		3008E53C1BB2864300A865FC = {
 			isa = PBXGroup;
 			children = (
@@ -345,9 +361,10 @@
 		3008E5A51BB290A800A865FC /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3008E6EA1BB6BC8500A865FC /* Content（内容） */,
 				3008E6DD1BB6BC7700A865FC /* Tool（业务逻辑） */,
 				3008E5AC1BB290A800A865FC /* Home（首页） */,
+				3008E6EA1BB6BC8500A865FC /* Content（内容） */,
+				30EFAC821BC62FAB0034F079 /* comment（评论） */,
 				3008E5C01BB290A800A865FC /* Setting（设置） */,
 				3008E5A61BB290A800A865FC /* Favourite（收藏） */,
 				3008E5B21BB290A800A865FC /* Lib（第三方库） */,
@@ -429,8 +446,8 @@
 			children = (
 				3008E66D1BB3BB3E00A865FC /* XSStoriesCell.h */,
 				3008E66E1BB3BB3E00A865FC /* XSStoriesCell.m */,
-				30FEFE941BBD12FC00AE084D /* XSCellHeadView.h */,
-				30FEFE951BBD12FC00AE084D /* XSCellHeadView.m */,
+				30E44DD01BD3F99B00E2F1EF /* XSHeadView.h */,
+				30E44DD11BD3F99B00E2F1EF /* XSHeadView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -438,6 +455,7 @@
 		3008E5B21BB290A800A865FC /* Lib（第三方库） */ = {
 			isa = PBXGroup;
 			children = (
+				304486081BDFD71200FD8091 /* LaunchView */,
 				3008E6F41BB6BDFC00A865FC /* Reachability */,
 				3008E6701BB3BEE100A865FC /* SDWebImage */,
 				3008E5EA1BB2CFE500A865FC /* AFNetworking */,
@@ -709,9 +727,12 @@
 		3008E6DD1BB6BC7700A865FC /* Tool（业务逻辑） */ = {
 			isa = PBXGroup;
 			children = (
+				309BF0E71BDE5A0F00B8A5B6 /* StoreTool */,
+				3003C6331BD60A150042339A /* New Group */,
+				30A24AA71BD0AA3B00A88709 /* CacheTool */,
 				30FEFE9A1BBD3C9300AE084D /* cleanCache（清除缓存） */,
 				3008E6FE1BB6F8E300A865FC /* HttpTool（网络请求） */,
-				3008E6FB1BB6F8A700A865FC /* CssFileTool */,
+				3008E6FB1BB6F8A700A865FC /* CssFileTool（css文件） */,
 			);
 			name = "Tool（业务逻辑）";
 			path = Tool;
@@ -749,6 +770,7 @@
 		3008E6EF1BB6BC8500A865FC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				309BF07C1BDE272900B8A5B6 /* SpinKit */,
 				3008E6F11BB6BCE400A865FC /* XSToolView.h */,
 				3008E6F21BB6BCE400A865FC /* XSToolView.m */,
 			);
@@ -764,13 +786,13 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
-		3008E6FB1BB6F8A700A865FC /* CssFileTool */ = {
+		3008E6FB1BB6F8A700A865FC /* CssFileTool（css文件） */ = {
 			isa = PBXGroup;
 			children = (
 				3008E6DE1BB6BC7700A865FC /* XSCssFile.h */,
 				3008E6DF1BB6BC7700A865FC /* XSCssFile.m */,
 			);
-			name = CssFileTool;
+			name = "CssFileTool（css文件）";
 			sourceTree = "<group>";
 		};
 		3008E6FC1BB6F8B600A865FC /* VCRequest（业务请求） */ = {
@@ -792,6 +814,72 @@
 				3008E6FC1BB6F8B600A865FC /* VCRequest（业务请求） */,
 			);
 			name = "HttpTool（网络请求）";
+			sourceTree = "<group>";
+		};
+		304486081BDFD71200FD8091 /* LaunchView */ = {
+			isa = PBXGroup;
+			children = (
+				304486091BDFD71200FD8091 /* YFStartView.h */,
+				3044860A1BDFD71200FD8091 /* YFStartView.m */,
+			);
+			path = LaunchView;
+			sourceTree = "<group>";
+		};
+		309BF07C1BDE272900B8A5B6 /* SpinKit */ = {
+			isa = PBXGroup;
+			children = (
+				309BF07D1BDE272900B8A5B6 /* RTSpinKitView.h */,
+				309BF07E1BDE272900B8A5B6 /* RTSpinKitView.m */,
+			);
+			path = SpinKit;
+			sourceTree = "<group>";
+		};
+		309BF0E71BDE5A0F00B8A5B6 /* StoreTool */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = StoreTool;
+			sourceTree = "<group>";
+		};
+		30A24AA71BD0AA3B00A88709 /* CacheTool */ = {
+			isa = PBXGroup;
+			children = (
+				30A24AA41BD0AA2E00A88709 /* XSCacheTool.h */,
+				30A24AA51BD0AA2E00A88709 /* XSCacheTool.m */,
+			);
+			name = CacheTool;
+			sourceTree = "<group>";
+		};
+		30EFAC821BC62FAB0034F079 /* comment（评论） */ = {
+			isa = PBXGroup;
+			children = (
+				30EFAC831BC62FAB0034F079 /* Controller */,
+				30EFAC841BC62FAB0034F079 /* Model */,
+				30EFAC851BC62FAB0034F079 /* View */,
+			);
+			name = "comment（评论）";
+			path = comment;
+			sourceTree = "<group>";
+		};
+		30EFAC831BC62FAB0034F079 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		30EFAC841BC62FAB0034F079 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		30EFAC851BC62FAB0034F079 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		30FEFE9A1BBD3C9300AE084D /* cleanCache（清除缓存） */ = {
@@ -907,6 +995,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3008E6F01BB6BC8500A865FC /* XSContentController.m in Sources */,
+				30E44DD21BD3F99B00E2F1EF /* XSHeadView.m in Sources */,
 				3008E64D1BB2CFE500A865FC /* MJRefreshFooterView.m in Sources */,
 				3008E6471BB2CFE500A865FC /* NSObject+MJCoding.m in Sources */,
 				3008E64E1BB2CFE500A865FC /* MJRefreshHeaderView.m in Sources */,
@@ -928,6 +1017,7 @@
 				3008E65F1BB2D50D00A865FC /* XSStories.m in Sources */,
 				3008E63F1BB2CFE500A865FC /* AFURLSessionManager.m in Sources */,
 				3008E64F1BB2CFE500A865FC /* UIScrollView+MJExtension.m in Sources */,
+				30A24AA61BD0AA2E00A88709 /* XSCacheTool.m in Sources */,
 				3008E5CC1BB290A800A865FC /* UIView+Frame.m in Sources */,
 				3008E69A1BB3BEE100A865FC /* SDWebImagePrefetcher.m in Sources */,
 				3008E63C1BB2CFE500A865FC /* AFURLConnectionOperation.m in Sources */,
@@ -936,6 +1026,7 @@
 				3008E6381BB2CFE500A865FC /* AFHTTPRequestOperationManager.m in Sources */,
 				3008E6461BB2CFE500A865FC /* MJType.m in Sources */,
 				3008E63A1BB2CFE500A865FC /* AFNetworkReachabilityManager.m in Sources */,
+				3044860B1BDFD71200FD8091 /* YFStartView.m in Sources */,
 				3008E6511BB2CFE500A865FC /* UIView+MJExtension.m in Sources */,
 				3008E6E61BB6BC7700A865FC /* XSCssFile.m in Sources */,
 				3008E6E71BB6BC7700A865FC /* XSHttpTool.m in Sources */,
@@ -948,8 +1039,8 @@
 				3008E6F31BB6BCE400A865FC /* XSToolView.m in Sources */,
 				3008E66F1BB3BB3E00A865FC /* XSStoriesCell.m in Sources */,
 				3008E5D11BB2916E00A865FC /* XSNavigationController.m in Sources */,
-				30FEFE961BBD12FC00AE084D /* XSCellHeadView.m in Sources */,
 				3008E69F1BB3BEE100A865FC /* UIImageView+HighlightedWebCache.m in Sources */,
+				309BF07F1BDE272900B8A5B6 /* RTSpinKitView.m in Sources */,
 				3008E64B1BB2CFE500A865FC /* MJRefreshBaseView.m in Sources */,
 				3008E6621BB2D51F00A865FC /* XSTopStories.m in Sources */,
 				3008E63D1BB2CFE500A865FC /* AFURLRequestSerialization.m in Sources */,
@@ -1099,11 +1190,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = zhiHu2.0/Classes/Others/XSProject.pch;
 				INFOPLIST_FILE = zhiHu2.0/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1111,11 +1206,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = zhiHu2.0/Classes/Others/XSProject.pch;
 				INFOPLIST_FILE = zhiHu2.0/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

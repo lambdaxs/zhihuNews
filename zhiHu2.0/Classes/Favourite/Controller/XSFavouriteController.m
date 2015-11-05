@@ -7,13 +7,14 @@
 //
 
 #import "XSFavouriteController.h"
+#import "XSResult.h"
+#import "XSCacheTool.h"
 
 @interface XSFavouriteController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 
-//@property (nonatomic,strong) UIView *naviView;
-
+@property (nonatomic,strong) NSArray *modelsArray;
 @end
 
 @implementation XSFavouriteController
@@ -29,43 +30,16 @@
     return _tableView;
 }
 
-#pragma mark - 懒加载顶部拦
-//-(UIView *)naviView
-//{
-//    if (!_naviView) {
-//        UIView *naviView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 60)];
-//        naviView.backgroundColor = [UIColor whiteColor];
-//        //顶部返回按钮
-//        UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [backBtn setTitle:@"返回" forState:UIControlStateNormal];
-//        backBtn.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:17];
-//        backBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-//        backBtn.frame = CGRectMake(0, 20, 35, 35);
-//        [backBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//        [backBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-//        [naviView addSubview:backBtn];
-//        
-//        //中间标题label
-//        UILabel *favoLabel = [[UILabel alloc] init];
-//        favoLabel.text = @"收藏";
-//        favoLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
-//        favoLabel.textAlignment = NSTextAlignmentCenter;
-//        favoLabel.textColor = [UIColor blackColor];
-//        favoLabel.frame = CGRectMake(0, 20, naviView.width, 35);
-//        [naviView addSubview:favoLabel];
-//        
-//        _naviView = naviView;
-//    }
-//    return _naviView;
-//}
+-(NSArray *)modelsArray {
+    if (!_modelsArray) {
+        //遍历down开头的key 将对象存入数组 再解析
+//        [[NSUserDefaults standardUserDefaults] ];
+//        [XSCacheTool getCacheObjectWithDownloadKey:<#(NSString *)#>];
+    }
+    return _modelsArray;
+}
 
-//-(void)back
-//{
-//    [self dismissViewControllerAnimated:YES completion:^{
-//        
-//    }];
-//    
-//}
+
 
 #pragma mark - lifeCycle
 - (void)viewDidLoad {

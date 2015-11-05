@@ -17,13 +17,10 @@
 
 /** pop按钮 */
 @property (nonatomic,strong) UIButton *popBtn;
-
 /** 喜欢按钮 */
 @property (nonatomic,strong) UIButton *favoBtn;
-
 /** 离线下载按钮 */
 @property (nonatomic,strong) UIButton *downloadBtn;
-
 /** 评论按钮 */
 @property (nonatomic,strong) UIButton *comBtn;
 /** 分享按钮 */
@@ -37,29 +34,24 @@
 -(void)drawRect:(CGRect)rect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    
     CGContextSetRGBStrokeColor(context, 20/255.0, 20/255.0, 20/255.0, 1);
     CGContextSetLineWidth(context, 0.5f);
     CGContextMoveToPoint(context, 0, 0);
     CGContextAddLineToPoint(context, self.width, 0);
-    
     CGContextStrokePath(context);
-    
 }
 
-#pragma mark - 单例创建新闻内容下方的工具栏
-+(instancetype)sharedInstance
+
+
+- (instancetype)init
 {
-    __strong static XSToolView *sharedManager;
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+    if (self = [super init]) {
         CGFloat toolX = 0;
         CGFloat toolY = SCREEN_H - TOOL_H;
-        sharedManager = [[XSToolView alloc] initWithFrame:CGRectMake(toolX, toolY, SCREES_W, SCREEN_H)];
-        sharedManager.backgroundColor = RGBA(225, 225, 225, 0.5);
-    });
-    return sharedManager;
+        self = [[XSToolView alloc] initWithFrame:CGRectMake(toolX, toolY, SCREES_W, SCREEN_H)];
+        self.backgroundColor = RGBA(225, 225, 225, 0.5);
+    }
+    return self;
 }
 
 #pragma mark - 设置工具栏按钮
@@ -144,7 +136,6 @@
         //分享
         XSLog(@"share");
     }
-    
     
 }
 

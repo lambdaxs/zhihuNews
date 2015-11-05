@@ -51,8 +51,22 @@
     [super viewDidLoad];
     self.title = @"设置";
     [self.view addSubview:self.tableView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
+#warning mark - 需要缓存类封装
+    NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *favosPath = [cachePath stringByAppendingPathComponent:@"favos.txt"];
     
+    NSString *list = [NSString stringWithContentsOfFile:favosPath encoding:NSUTF8StringEncoding error:nil];
+    
+    NSLog(@"%@",cachePath);
+    [[list componentsSeparatedByString:@"+"] enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        NSLog(@"%@",obj);
+    }];
 }
 
 

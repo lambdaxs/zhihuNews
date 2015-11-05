@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XSHomeController : UITableViewController
+@interface XSHomeController : UIViewController
 
 @end

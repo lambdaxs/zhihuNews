@@ -15,6 +15,7 @@
 //"id":7117730,
 //"ga_prefix":"092320",
 //"title":"只想去个人少景美的地方，安安静静待一周"
+
 /** 顶部故事图片的URL */
 @property (nonatomic,copy) NSString *image;
 /** 顶部故事类型 */

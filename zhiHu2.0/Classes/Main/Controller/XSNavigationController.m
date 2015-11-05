@@ -24,14 +24,13 @@
 {
     // 设置导航条按钮的文字颜色
     UIBarButtonItem *item = [UIBarButtonItem appearanceWhenContainedIn:self, nil];
-    NSDictionary *titleAttr = @{NSForegroundColorAttributeName:[UIColor blackColor],NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Bold" size:18.0]};
+    NSDictionary *titleAttr = @{NSForegroundColorAttributeName:[UIColor blackColor],NSFontAttributeName:[UIFont systemFontOfSize:18.0f]};
     [item setTitleTextAttributes:titleAttr forState:UIControlStateNormal];
     
     //设置导航条背景图片 文字样式
     UINavigationBar *naviBar = [UINavigationBar appearanceWhenContainedIn:self, nil];
 //    [naviBar setBackgroundImage:[UIImage imageNamed:@"naviBarbg"] forBarMetrics:UIBarMetricsDefault];
-    [naviBar setTitleTextAttributes:titleAttr];
-    
+    [naviBar setTitleTextAttributes:titleAttr];    
     
     //设置状态栏为浅色
 //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
@@ -47,7 +46,7 @@
     self.delegate = self;
     
     //自定义返回按钮后 添加滑动返回手势
-    __weak typeof(self) weakSelf = self;
+    weakSelf();
     if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.interactivePopGestureRecognizer.delegate = weakSelf;
     }

@@ -110,8 +110,10 @@ NSString * const ID = @"cycleCell";
     _flowLayout = flowLayout;
     
     UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
+    mainView.scrollsToTop = NO;
     mainView.backgroundColor = [UIColor clearColor];
     mainView.pagingEnabled = YES;
+#warning mark - 关掉顶部视图的srcollToTop属性
     mainView.showsHorizontalScrollIndicator = NO;
     mainView.showsVerticalScrollIndicator = NO;
     [mainView registerClass:[SDCollectionViewCell class] forCellWithReuseIdentifier:ID];

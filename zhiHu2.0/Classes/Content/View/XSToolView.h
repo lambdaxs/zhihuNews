@@ -22,12 +22,11 @@ typedef enum {
 @class XSToolView;
 @protocol XSToolViewDelegate <NSObject>
 
--(void)toolView:(XSToolView *)view buttonType:(XSToolBtnType)type;
+- (void)toolView:(XSToolView *)view buttonType:(XSToolBtnType)type;
 
 @end
-@interface XSToolView : UIView
 
-+(instancetype)sharedInstance;
+@interface XSToolView : UIView
 
 @property (nonatomic,weak) id<XSToolViewDelegate> delegate;
 

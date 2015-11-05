@@ -24,40 +24,46 @@
     return destDateString;
 }
 
+#warning mark - 知乎的服务器更新在早上7点
 + (NSString *)getThePastDayWithNumber:(NSInteger)number
 {
     NSDateFormatter *dft = [[NSDateFormatter alloc] init];
     [dft setDateFormat:@"yyyyMMdd"];
-    NSDate *pastDay;
+    NSDate *pastDay = [self isUpdate] ? [NSDate dateWithTimeIntervalSinceNow:-(number*24*3600)]: [NSDate dateWithTimeIntervalSinceNow:-(number+1)*24*3600];
     
-    if ([self isPastSixHours]) {
-        //超过6点正常返回值
-        pastDay = [NSDate dateWithTimeIntervalSinceNow:-(number*24*3600)];
-    }else{
-        //0---6点跳着返回值
-        pastDay = [NSDate dateWithTimeIntervalSinceNow:-(number++)*24*3600];
-    }
-
     return [dft stringFromDate:pastDay];
 }
 
-/** 判断是否处在一天的0----6点 */
-+ (BOOL)isPastSixHours
+/** 判断是否更新了故事 */
++ (BOOL)isUpdate
 {
-    NSDate *yesterDay = [NSDate dateWithTimeIntervalSinceNow:-(24*60*60)];
-    NSDate *sixHour = [NSDate dateWithTimeIntervalSinceNow:-(6*60*60)];
-    
     NSDateFormatter *dft = [[NSDateFormatter alloc] init];
     [dft setDateFormat:@"yyyyMMdd"];
     
-    NSString *yesterdayStr = [dft stringFromDate:yesterDay];
-    NSString *sixhourStr = [dft stringFromDate:sixHour];
+    NSString *yesterdayStr = [dft stringFromDate:[NSDate dateWithTimeIntervalSinceNow:-(24*3600)]];
+    NSString *pastSevenhourStr = [dft stringFromDate:[NSDate dateWithTimeIntervalSinceNow:-(7*3600)]];
     
-    if ([yesterdayStr isEqualToString:sixhourStr]) {
-        return NO;
-    }else{
-        return YES;
-    }
+    return [yesterdayStr isEqualToString:pastSevenhourStr] ? NO: YES;
+}
+
++ (NSString *)dateStrForHeadViewWith:(NSString *)dateStr
+{
+    NSRange monthRange = [@"19990203" rangeOfString:@"02"];
+    NSString *monthStr = [dateStr substringWithRange:monthRange];
+    NSRange dayRange = [@"19990203" rangeOfString:@"03"];
+    NSString *dayStr = [dateStr substringWithRange:dayRange];
+    
+    //字符串转日期
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    df.dateFormat = @"yyyyMMdd";
+    NSDate *curDate = [df dateFromString:dateStr];
+    //日历操作判断星期
+    NSCalendar *gregorian = [NSCalendar currentCalendar];
+    NSDateComponents *dayComponents = [gregorian components:NSCalendarUnitWeekday fromDate:curDate];
+    NSInteger weekNum = [dayComponents weekday];
+    NSArray *weekArr = @[@"error",@"星期天",@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六"];
+    
+    return [NSString stringWithFormat:@" %@月%@日 %@",monthStr,dayStr,weekArr[weekNum]];
 }
 
 

@@ -9,15 +9,12 @@
 #import <UIKit/UIKit.h>
 
 /** cell高度 */
-#define CELL_HEIGHT 85.0
-
+extern const CGFloat cellHeight;
 
 @class XSStories;
 @interface XSStoriesCell : UITableViewCell
 
 /** cell中的故事模型 */
 @property (nonatomic,strong) XSStories *storiesModel;
-
-+ (instancetype)storiesCellWithTableView:(UITableView *)tableView;
 
 @end

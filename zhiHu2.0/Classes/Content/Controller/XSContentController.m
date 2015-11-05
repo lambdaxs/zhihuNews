@@ -10,112 +10,50 @@
 
 #import "MBProgressHUD+Extend.h"
 #import "MJExtension.h"
+#import "RTSpinKitView.h"
 
 #import "XSResultTool.h"
 #import "XSToolView.h"
 #import "XSCssFile.h"
+#import "XSCacheTool.h"
+
 
 @interface XSContentController ()<UIWebViewDelegate,XSToolViewDelegate>
 
 @property (nonatomic,strong) UIWebView *webView;
-
-/** 接收的内容Url */
-@property (nonatomic,copy) NSString *storiesId;
-
-@property (nonatomic,strong) UIView *transView;
+@property (nonatomic,strong) UIView *bgView;                //浏览器承载view
+@property (nonatomic,strong) XSToolView *toolBar;           //工具栏视图
+@property (nonatomic,strong) RTSpinKitView *loadingHubView; //加载动画
+@property (nonatomic,copy) NSString *storiesId;             //故事id
 
 @end
 
 @implementation XSContentController
 
--(UIWebView *)webView
-{
-    if (!_webView) {
-        //承载webView的一个view 在滚动web时上面的状态栏不会遮挡住web内容
-        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, self.view.width, self.view.height - (TOOL_H + 20))];
-        [bgView setBackgroundColor:[UIColor whiteColor]];
-        [self.view addSubview:bgView];
-        _webView = [[UIWebView alloc] initWithFrame:bgView.bounds];
-        _webView.delegate = self;
-        [bgView addSubview:_webView];
-    }
-    return _webView;
-}
-
-#pragma mark - 类方法直接返回初始化好的控制器对象
-+(instancetype)contentViewWithStoiresId:(NSString *)storiesId
+#pragma mark - init
++ (instancetype)contentViewWithStoiresId:(NSString *)storiesId
 {
     XSContentController *contentVC = [[self alloc] init];
     contentVC.storiesId = storiesId;
     return contentVC;
 }
 
-#pragma mark - lifeCycle
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    //添加底部工具栏
-    XSToolView *toolBar = [XSToolView sharedInstance];
-    toolBar.delegate = self;
-    [self.view addSubview:toolBar];
+    [self.view addSubview:self.loadingHubView];     //加载动画
+    [self.view addSubview:self.toolBar];            //底部工具栏
+}
+
+#pragma mark - Delegate
+- (void)toolView:(XSToolView *)view buttonType:(XSToolBtnType)type
+{
+    NSMutableArray *idArray;
+    NSString *downKey;
+    NSArray *tempArray;
     
-#warning mark - 等待动画 抽取出去复用
-    UIView *transView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    transView.center = self.view.center;
-    [transView setBackgroundColor:RGB(1, 120, 216)];
-    [self.view addSubview:transView];
-    [self setUpWaitAnimationWithView:transView];
-    _transView = transView;
-    
-}
-#pragma mark - 设置等待旋转动画
-- (void)setUpWaitAnimationWithView:(UIView *)view
-{
-    CABasicAnimation* rotationAnimation;
-    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 ];
-    rotationAnimation.duration = 3.0;
-    rotationAnimation.cumulative = YES;
-    rotationAnimation.repeatCount = 10;
-    [view.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
-}
-
-#pragma mark - 为故事id赋值 然后加载内容
--(void)setStoriesId:(NSString *)storiesId
-{
-    _storiesId = storiesId;
-    XSResultTool *resultTool = [[XSResultTool alloc] init];
-    resultTool.stoiresId = storiesId;
-    
-    [resultTool getStoriesContentWithSuccess:^(NSString *htmlStr) {
-        [MBProgressHUD hideHUD];
-        //加载网页
-        [self.webView loadHTMLString:htmlStr baseURL:[NSURL fileURLWithPath:[XSCssFile getPathOfCssFile]]];
-        
-    } failure:^(NSError *error) {
-        XSLog(@"%@",error);
-        [MBProgressHUD showError:@"网络连接不稳定"];
-
-    }];
-    
-}
-
-#pragma mark - implement UIWebViewDelegate
-
--(void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    [_transView removeFromSuperview];
-}
-
--(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-    [MBProgressHUD showError:@"网络连接不稳定"];
-}
-
-#pragma mark - implement toolviewDelegate
--(void)toolView:(XSToolView *)view buttonType:(XSToolBtnType)type
-{
     //对应工具栏按钮 分别在代理方法中实现对应功能
     switch (type) {
         case XSPopBtn:
@@ -123,9 +61,16 @@
             break;
         case XSFavoBtn:
             [MBProgressHUD showSuccess:@"已点赞"];
-            
             break;
         case XSDownloadBtn:
+#warning mark - 抽取逻辑到工具类中
+            //离线内容保存
+            tempArray = [[NSUserDefaults standardUserDefaults] arrayForKey:@"downKeyArray"];
+            downKey = [NSString stringWithFormat:@"%@%@",DOWNLOAD_KEY,self.storiesId];
+            [idArray addObject:self.storiesId];
+            [[NSUserDefaults standardUserDefaults] setObject:idArray forKey:@"downKeyArray"];
+            
+            [XSCacheTool saveCacheWithObject:[XSCacheTool getCacheObjectWithSotiresKey:self.storiesId] forDownloadKey:self.storiesId];
             [MBProgressHUD showSuccess:@"已下载"];
             break;
         case XSComBtn:
@@ -137,5 +82,70 @@
     }
     
 }
+
+#pragma mark - events response
+
+#pragma mark - private methods
+
+#pragma mark - getter & setter
+-(UIWebView *)webView
+{
+    if (!_webView) {
+        //承载webView的一个view 在滚动web时上面的状态栏不会遮挡住web内容
+        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0 , 20, self.view.width, self.view.height - (TOOL_H + 20))];
+        self.bgView = bgView;
+        [bgView setBackgroundColor:[UIColor whiteColor]];
+        [self.view addSubview:bgView];
+        _webView = [[UIWebView alloc] initWithFrame:bgView.bounds];
+        _webView.delegate = self;
+        [bgView addSubview:_webView];
+    }
+    return _webView;
+}
+
+- (XSToolView *)toolBar
+{
+    if (!_toolBar) {
+        _toolBar = [[XSToolView alloc] init];
+        _toolBar.delegate = self;
+    }
+    return _toolBar;
+}
+
+- (RTSpinKitView *)loadingHubView
+{
+    if (!_loadingHubView) {
+        _loadingHubView = [[RTSpinKitView alloc]initWithStyle:RTSpinKitViewStyleWave color:RGB(1, 120, 216)];
+        _loadingHubView.hidden = YES;
+        _loadingHubView.center = self.view.center;
+    }
+    return _loadingHubView;
+}
+
+
+- (void)setStoriesId:(NSString *)storiesId
+{
+    _storiesId = storiesId;
+    
+    id response = [XSCacheTool getCacheObjectWithSotiresKey:self.storiesId];
+    //若已缓存 直接在缓存中读取
+    if (response) {
+        [self.webView loadHTMLString:[XSResultTool getHtmlStrWithResponse:response] baseURL:[NSURL fileURLWithPath:[XSCssFile getPathOfCssFile]]];
+    }else{
+        
+        //若无缓存 调用网络库
+        self.loadingHubView.hidden = NO;
+        weakSelf();
+        [XSResultTool getStoriesContentWithStoiresId:storiesId forSuccess:^(NSString *htmlStr) {
+            
+            self.loadingHubView.hidden = YES;
+            [weakSelf.webView loadHTMLString:htmlStr baseURL:[NSURL fileURLWithPath:[XSCssFile getPathOfCssFile]]];
+            
+        } failure:^(NSError *error) {
+            XSLog(@"%@",error);
+        }];
+    }
+}
+
 
 @end
